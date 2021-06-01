@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" 
+    rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@1,500&display=swap" 
+  rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <div class="page">
+    <div class="calc">
+      <div class="bobs-logo">Bob's Tech</div>
+      <input type="text" class="calc__display" value="0" disabled/>
+      <div class="calc__keyboard">
+        <div class="calc__keyboard--control">
+          <button class="btn btn--control btn--recent"></button>
+          <button class="btn btn--control btn--delete"></button>
+        </div>
+        <div class="calc__keyboard--main" id="calc__keyboard--main">
+          <button class="btn btn--clear" value="C">C</button>
+          <button class="btn btn--operator" value="+" >+-</button>
+          <button class="btn btn--operator" value="%">%</button>
+          <button class="btn btn--operator" value="/">/</button>
+          <button class="btn btn--number button--seven" value="7">7</button>
+          <button class="btn btn--number button--eight" value="8">8</button>
+          <button class="btn btn--number button--nine" value="9">9</button>
+          <button class="btn btn--operator" value="*">*</button>
+          <button class="btn btn--number button--four" value="4">4</button>
+          <button class="btn btn--number button--five" value="5">5</button>
+          <button class="btn btn--number button--six" value="6">6</button>
+          <button class="btn btn--operator" value="-">-</button>
+          <button class="btn btn--number button--one" value="1">1</button>
+          <button class="btn btn--number button--two" value="2">2</button>
+          <button class="btn btn--number button--three" value="3">3</button>
+          <button class="btn btn--operator" value="+" value="+">+</button>
+          <button class="btn btn--number button--zero" value="0">0</button>
+          <button class="btn btn--point" value=".">.</button>
+          <button class="btn btn--operator btn--equality" value="=">=</button>
+        </div>
+
+      </div>
+
+      
+    </div>
+  </div> 
+  <script src="script.js"></script>
+</body>
+</html>
