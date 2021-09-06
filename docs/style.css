@@ -1,0 +1,154 @@
+body {
+  background-color: #f2cda6;
+  font-family: 'Share Tech Mono', monospace;
+}
+button {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 26px;
+  font-weight: 700;
+}
+.bobs-logo {
+  position: relative;
+  top: 15px;
+  text-align: end;
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 8px; 
+  background-color: silver;
+  color: transparent;
+  text-shadow: 0px 2px 3px rgba(255,255,255,0.4), 1px 1px 1px rgba(150, 150, 150, 0.75);;
+  -webkit-background-clip: text;
+     -moz-background-clip: text;
+          background-clip: text;
+}
+
+.page {
+  margin: auto;
+}
+
+.calc {
+  position: relative;
+  margin: 20px auto;
+  padding: 0 22px;
+  width: 280px;
+  height: 580px;
+  background-color: #e3dfdc;
+  border-radius: 30px;
+  box-shadow: 0px 5px 40px #ecb78c;
+}
+
+.calc__display {
+  position: relative;
+  top: 25px;
+  width: 85%;
+  padding: 20px 15px 10px;
+  border-radius: 7px;
+  text-align: right;
+  background-color: #bfbfa1;
+  border: 7px solid #1b1b1b;
+  font-size: 46px;
+  font-weight: 700;
+  box-shadow: inset 0px 5px 6px #5f5f57;
+}
+
+.calc__display--result {
+    margin-bottom: 8px;
+
+
+}
+
+.calc__display--operation {
+    font-size: 18px;
+    color: #959291;
+}
+
+.calc__keyboard {
+  position: relative;
+  top: 60px;
+}
+
+.calc__keyboard--main,
+.calc__keyboard--control {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 11px;
+}
+
+.calc__keyboard--main {
+  position: relative;
+  top: 55px;
+  margin: auto;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  box-shadow: 0px 3px 2px #848381;
+  min-width: 50px;
+  min-height: 50px;
+  border-width: 5px 7px 7px;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.btn--control {
+  min-height: 40px;
+  margin-bottom: 15px;
+  border-color: #1b1b1b;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-color: #4b4b4b;
+}
+
+.btn:hover,
+.btn:focus {
+  box-shadow: 0px 3px 3px #9e3f00;
+}
+
+.btn:active {
+  box-shadow: 0px 3px 1px #585756;
+  transform: translateY(1.75px);
+}
+
+.btn--recent {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  background-image: url(src/icons/recent.svg);
+}
+
+.btn--delete {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  background-image: url(src/icons/delete.svg);
+  background-size: 40%;
+}
+
+.btn--operator {
+  border-color: #de9746;
+  background-color: #eab072;
+  color: #fff;
+}
+
+.btn--number,
+.btn--point {
+  background-color: #f6f0eb;
+  border-color: #e3d8ca;
+  color: #a65429;
+}
+
+.btn--clear {
+  color: #692703;
+  background-color: #db6428;
+  border-color: #a65429;
+}
+
+.button--zero {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.highlight {
+  background-color: pink;
+}
