@@ -1,100 +1,84 @@
-// let keyboard = document.getElementById('calc__keyboard--main');
-
-// let selectedBtn;
-
-// let output = document.getElementById('calc__keyboard--main');
-
-// keyboard.onclick = function(event) {
-//     let target = event.target;
-
-//     while (target != this) {
-//       if (target.tagName == 'BUTTON') {
-//         highlight(target);
-//         return;
-//       }
-//       target = target.parentNode;
-//     }
-//   }
-
-//   function highlight(node) {
-//     if (selectedBtn) {
-//       selectedBtn.classList.remove('highlight');
-//     }
-//     selectedBtn = node;
-//     selectedBtn.classList.add('highlight');
-// }
-
 const calculator = {
-    displayValue: '0',
-    firstOperand: null,
-    waitingForSecondOperand: false,
-    operator: null,
-    result: '',
+  displayValue: '0',
+  firstOperand: null,
+  waitingForSecondOperand: false,
+  operator: null,
+  result: '',
+  resultStorage: [],
 };
 
 function inputDigit(digit) {
-    const { displayValue, waitingForSecondOperand } = calculator;
+  const { displayValue, waitingForSecondOperand } = calculator;
 
-    if (waitingForSecondOperand === true) {
-        calculator.displayValue = digit;
-        calculator.waitingForSecondOperand  = false;
-    } else {
-        calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
-    }
+  if (waitingForSecondOperand === true) {
+    calculator.displayValue = digit;
+    calculator.waitingForSecondOperand  = false;
+  } else {
+    calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+  }
 
-    console.log(calculator);
+  console.log(calculator);
 }
 
 function inputDecimal(dot) {
-    if (!calculator.displayValue.includes(dot)) {
-        calculator.displayValue += dot;
-    }
+  if (calculator.waitingForSecondOperand === true) {
+    calculator.displayValue = "0.";
+    calculator.waitingForSecondOperand = false;
+    return;
+  }
+
+  if (!calculator.displayValue.includes(dot)) {
+    calculator.displayValue += dot;
+  }
 }
 
 function handleOperator(nextOperator) {
-    const { firstOperand, displayValue, operator } = calculator;
+  const { firstOperand, displayValue, operator } = calculator;
 
-    const inputValue = parseFloat(displayValue);
+  const inputValue = parseFloat(displayValue);
 
-    if (operator && calculator.waitingForSecondOperand) {
-      calculator.operator = nextOperator;
-      console.log(calculator);
-      return;
-    }
-
-    if (firstOperand === null && !isNaN(inputValue)) {
-        calculator.firstOperand = inputValue;
-    } else if (operator) {
-        const result = calculate(firstOperand, inputValue, operator);
-        calculator.displayValue = String(result);
-        calculator.firstOperand = result;
-    }
-
-    calculator.waitingForSecondOperand = true;
+  if (operator && calculator.waitingForSecondOperand) {
     calculator.operator = nextOperator;
     console.log(calculator);
+    return;
+  }
+
+  if (firstOperand === null && !isNaN(inputValue)) {
+    calculator.firstOperand = inputValue;
+  } else if (operator) {
+    const result = calculate(firstOperand, inputValue, operator);
+    calculator.displayValue = `${parseFloat(result.toFixed(7))}`;
+    calculator.resultStorage.push(result);
+    calculator.firstOperand = result;
+  }
+
+  calculator.waitingForSecondOperand = true;
+  calculator.operator = nextOperator;
+  console.log(calculator);
 }
 
 function calculate(firstOperand, SecondOperand, operator) {
-    if (operator === '+') {
-        return firstOperand + SecondOperand;
-    } else if (operator === '*') {
-        return firstOperand * SecondOperand
-    } else if (operator === '-') {
-        return firstOperand - SecondOperand
-    } else if (operator === '/') {
-        return firstOperand / SecondOperand
-    }
+  if (operator === '+') {
+    return firstOperand + SecondOperand;
+  } else if (operator === '*') {
+    return firstOperand * SecondOperand;
+  } else if (operator === '-') {
+    return firstOperand - SecondOperand;
+  } else if (operator === '/') {
+    return firstOperand / SecondOperand;
+  } else if (operator === '%') {
+    return ((firstOperand/100)*SecondOperand);
+  }
 
-    return SecondOperand;
+  return SecondOperand;
 }
 
 function resetCalculator() {
-    calculator.displayValue = '0';
-    calculator.firstOperand = null;
-    calculator.waitingForSecondOperand = false;
-    calculator.operator = null;
-    console.log(calculator);
+  calculator.displayValue = '0';
+  calculator.firstOperand = null;
+  calculator.waitingForSecondOperand = false;
+  calculator.operator = null;
+  console.log(calculator);
 }
 
 function updateDisplay() {
@@ -102,35 +86,73 @@ function updateDisplay() {
   display.value = calculator.displayValue;
 }
 
-updateDisplay();
+function returnRecent() {
+  if (!calculator.firstOperand) return;
 
+  const lastResultIndex = calculator.resultStorage.lastIndexOf(calculator.firstOperand);
+
+  if (lastResultIndex - 1 === -1) {
+    return;
+  }
+
+  const prevResult = calculator.resultStorage[lastResultIndex - 1];
+  calculator.resultStorage.pop();
+  calculator.displayValue = prevResult;
+  calculator.firstOperand = prevResult;
+}
+
+function deleteValue() {
+  let lengthStr = calculator.displayValue.length;
+  calculator.displayValue = calculator.displayValue.slice(0, lengthStr-1);
+  calculator.firstOperand = calculator.displayValue;
+  console.log(calculator.displayValue);
+}
+
+function revertPolarity() {
+  calculator.firstOperand *= -1;
+  calculator.displayValue = calculator.firstOperand;
+}
 
 const keys = document.querySelector('.calc__keyboard--main');
+
 keys.addEventListener('click', (event) => {
 
-    const { target } = event;
+  const { target } = event;
+  const { value } = target;
 
-    if(!target.matches('button')) {
-        return;
-    }
+  if(!target.matches('button')) {
+    return;
+  }
 
-    if(target.classList.contains('btn--operator')) {
-        handleOperator(target.value);
-		updateDisplay();
-        return;
-    }
-
-    if(target.classList.contains('btn--clear')) {
-        console.log('clear', target.value);
-        return;
-    }
-
-    if(target.classList.contains('btn--point')) {
-        inputDecimal(target.value);
-        updateDisplay();
-        return;
-    }
+  switch (value) {
+    case '+':
+    case '-':
+    case '*':
+    case '/':
+    case '=':
+    case '%':
+      handleOperator(value);
+      break;
+    case '.':
+      inputDecimal(value);
+      break;
+    case 'clear': 
+      resetCalculator(value);
+      break;
+    case 'recent': 
+      returnRecent();
+      break;
+    case 'delete':
+      deleteValue();
+      break;
+    case '+-':
+      revertPolarity(value);
+      break;
+    default: 
+      if (Number.isInteger(parseFloat(value))) {
+        inputDigit(value);
+      }
+    }  
     
-    inputDigit(target.value);
     updateDisplay();
 });

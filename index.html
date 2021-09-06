@@ -17,14 +17,11 @@
     <div class="calc">
       <div class="bobs-logo">Bob's Tech</div>
       <input type="text" class="calc__display" value="0" disabled/>
-      <div class="calc__keyboard">
-        <div class="calc__keyboard--control">
-          <button class="btn btn--control btn--recent"></button>
-          <button class="btn btn--control btn--delete"></button>
-        </div>
-        <div class="calc__keyboard--main" id="calc__keyboard--main">
-          <button class="btn btn--clear" value="C">C</button>
-          <button class="btn btn--operator" value="+" >+-</button>
+        <div class="calc__keyboard--main" >
+          <button class="btn btn--control btn--recent" value='recent'></button>
+          <button class="btn btn--control btn--delete" value='delete'></button>
+          <button class="btn btn--clear" value="clear">C</button>
+          <button class="btn btn--operator" value="+-" >+-</button>
           <button class="btn btn--operator" value="%">%</button>
           <button class="btn btn--operator" value="/">/</button>
           <button class="btn btn--number button--seven" value="7">7</button>
@@ -42,11 +39,7 @@
           <button class="btn btn--number button--zero" value="0">0</button>
           <button class="btn btn--point" value=".">.</button>
           <button class="btn btn--operator btn--equality" value="=">=</button>
-        </div>
-
-      </div>
-
-      
+        </div>     
     </div>
   </div> 
   <script src="script.js"></script>

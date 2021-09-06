@@ -29,10 +29,10 @@ button {
 
 .calc {
   position: relative;
-  margin: 50px auto;
+  margin: 20px auto;
   padding: 0 22px;
-  width: 290px;
-  height: 600px;
+  width: 280px;
+  height: 580px;
   background-color: #e3dfdc;
   border-radius: 30px;
   box-shadow: 0px 5px 40px #ecb78c;
@@ -77,11 +77,9 @@ button {
 }
 
 .calc__keyboard--main {
+  position: relative;
+  top: 55px;
   margin: auto;
-}
-
-.calc__keyboard--control {
-  margin-bottom: 30px;
 }
 
 .btn {
@@ -97,6 +95,7 @@ button {
 
 .btn--control {
   min-height: 40px;
+  margin-bottom: 15px;
   border-color: #1b1b1b;
   background-repeat: no-repeat;
   background-position: 50%;
